@@ -6,7 +6,7 @@ BP_DIR=$(cd $(dirname $0); cd ..; pwd)
 EMBEDDED_BP_DIR=${BUILD_DIR}/.buildpack
 
 ${EMBEDDED_BP_DIR}/bin/compile ${BUILD_DIR} ${CACHE_DIR}
-ret = $?
+ret=$?
 
 if [ -e ${EMBEDDED_BP_DIR}/export ]; then
   echo "Forwarding ${EMBEDDED_BP_DIR}/exports to ${BP_DIR}/export."
