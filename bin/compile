@@ -2,7 +2,12 @@
 
 BUILD_DIR=${1}
 CACHE_DIR=${2}
-ROOT_BP_DIR=$(cd $(dirname $0); cd ..; pwd)
+BP_DIR=$(cd $(dirname $0); cd ..; pwd)
 EMBEDDED_BP_DIR=${BUILD_DIR}/.buildpack
 
-exec ${EMBEDDED_BP_DIR}/bin/compile ${BUILD_DIR} ${CACHE_DIR}
+${EMBEDDED_BP_DIR}/bin/compile ${BUILD_DIR} ${CACHE_DIR}
+
+if [ -f ${EMBEDDED_BP_DIR}/exports ]; then
+  echo "Forwarding ${EMBEDDED_BP_DIR}/exports to ${BP_DIR}/exports."
+  cp -p ${EMBEDDED_BP_DIR}/exports ${BP_DIR}/exports
+fi
